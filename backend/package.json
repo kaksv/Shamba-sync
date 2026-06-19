@@ -1,0 +1,25 @@
+{
+  "name": "shamba-sync-backend",
+  "version": "1.0.0",
+  "description": "Shamba-Sync Agri-Voice Agent - Multi-Agent System for African Agriculture",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "node src/index.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "type": "module",
+  "keywords": [
+    "croo",
+    "cap",
+    "agent",
+    "agriculture",
+    "ai"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
