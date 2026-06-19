@@ -41,48 +41,53 @@ function App() {
     }
   }
 
+  const tabs = [
+    { id: 'input', label: 'Diagnose Crop', icon: '🔬' },
+    { id: 'results', label: 'Results', icon: '📊' },
+    { id: 'pipeline', label: 'Agent Pipeline', icon: '⚙️' },
+    { id: 'cap', label: 'CAP Protocol', icon: '🤖' },
+    { id: 'whatsapp', label: 'WhatsApp', icon: '📱' },
+  ]
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50/30 to-white">
       <Header />
       <Hero />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
         {/* Tab Navigation */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          {[
-            { id: 'input', label: '🔬 Diagnose Crop', icon: '🔬' },
-            { id: 'results', label: '📊 Results', icon: '📊' },
-            { id: 'pipeline', label: '⚙️ Agent Pipeline', icon: '⚙️' },
-            { id: 'cap', label: '🤖 CAP Protocol', icon: '🤖' },
-            { id: 'whatsapp', label: '📱 WhatsApp', icon: '📱' },
-          ].map((tab) => (
+        <div className="flex flex-wrap justify-center gap-1.5 mb-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-1.5">
+          {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.id
-                  ? 'bg-emerald-700 text-white shadow-lg shadow-emerald-200'
-                  : 'bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 shadow-sm'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200/50'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
               }`}
             >
+              <span className="mr-1.5">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
         </div>
 
         {/* Tab Content */}
-        <div className="animate-fade-in">
+        <div className="animate-fade-in min-h-[400px]">
           {activeTab === 'input' && (
             <InputForm onSubmit={handleProcessQuery} loading={loading} error={error} />
           )}
 
           {activeTab === 'results' && (
             result ? <ResultsDashboard result={result} /> : (
-              <div className="text-center py-12 text-gray-500">
-                <p className="text-lg">No results yet. Submit a crop query first!</p>
+              <div className="text-center py-20">
+                <div className="text-5xl mb-4 text-gray-300">📋</div>
+                <p className="text-lg text-gray-400">No results yet</p>
+                <p className="text-sm text-gray-300 mt-1">Submit a crop query to see results here</p>
                 <button
                   onClick={() => setActiveTab('input')}
-                  className="mt-4 text-emerald-600 hover:text-emerald-800 font-medium"
+                  className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors text-sm font-medium"
                 >
                   Go to Input →
                 </button>

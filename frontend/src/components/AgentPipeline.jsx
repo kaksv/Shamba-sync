@@ -2,150 +2,108 @@ export default function AgentPipeline() {
   const agents = [
     {
       id: 1,
-      name: 'Translator & Vision Agent',
+      name: 'Translator & Vision',
       icon: '🔬',
       color: 'emerald',
       role: 'Speech-to-Text + Image Analysis',
-      description: 'Receives voice notes in Swahili, Hausa, Yoruba, or English and transcribes them. Also analyzes crop photos for disease detection using computer vision.',
-      capabilities: [
-        'Whisper speech-to-text for African languages',
-        'GPT-4o Vision for crop disease diagnosis',
-        'Translation between English and 5+ languages',
-        'Language detection from voice/text input',
-      ],
-      processes: 'Audio/Text/Image → Structured Diagnosis',
-      output: 'Crop identification, disease name, severity, symptoms, confidence score',
+      desc: 'Receives voice notes in African languages and transcribes them. Analyzes crop photos for disease detection.',
+      caps: ['Whisper speech-to-text', 'GPT-4o Vision analysis', 'Multi-language translation', 'Language detection'],
+      input: 'Audio / Image / Text',
+      output: 'Structured diagnosis',
     },
     {
       id: 2,
-      name: 'Agronomist Agent',
+      name: 'Agronomist',
       icon: '💊',
       color: 'amber',
       role: 'Treatment Recommendation Engine',
-      description: 'Cross-references detected diseases with a knowledge base of organic and chemical treatments available in the farmer\'s specific African region.',
-      capabilities: [
-        'Organic treatment recommendations (neem oil, compost tea, etc.)',
-        'Chemical treatment options with dosages',
-        'Cultural practices (crop rotation, mulching, pruning)',
-        'Region-specific availability and pricing',
-        'Preventative measures for future seasons',
-      ],
-      processes: 'Diagnosis + Region → Treatment Plan',
-      output: 'Organic treatments, chemical options, cultural practices, prevention tips',
+      desc: 'Cross-references diseases with organic and chemical treatments available in the farmer\'s specific region.',
+      caps: ['Organic treatments', 'Chemical options', 'Cultural practices', 'Region-specific advice'],
+      input: 'Diagnosis + Region',
+      output: 'Treatment plan',
     },
     {
       id: 3,
-      name: 'Market Connector Agent',
+      name: 'Market Connector',
       icon: '💰',
       color: 'blue',
       role: 'Price Intelligence + Buyer Network',
-      description: 'Queries real-time market data across East and West African markets, provides sell recommendations, and connects farmers directly to buyers.',
-      capabilities: [
-        'Real-time market price data from multiple markets',
-        'Price trend analysis (week/month/year)',
-        'Sell/Hold recommendations based on trends',
-        'Direct buyer connections to bypass middlemen',
-        'Local market supply analysis',
-      ],
-      processes: 'Crop + Region → Market Intelligence',
-      output: 'Current prices, trends, sell recommendation, buyer contacts, tips',
+      desc: 'Real-time market data, sell recommendations, and direct buyer connections to bypass middlemen.',
+      caps: ['Market prices', 'Trend analysis', 'Sell/Hold advice', 'Buyer connections'],
+      input: 'Crop + Region',
+      output: 'Market intelligence',
     },
   ]
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">⚙️ Multi-Agent Pipeline</h2>
-        <p className="text-gray-500 mt-2">Three specialized agents working together in sequence</p>
+    <div className="max-w-3xl mx-auto">
+      <div className="text-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">Agent Pipeline</h2>
+        <p className="text-sm text-gray-400 mt-1">Three specialized agents working in sequence</p>
       </div>
 
       <div className="space-y-0">
         {agents.map((agent, index) => (
           <div key={agent.id}>
-            <div className={`bg-white rounded-2xl shadow-lg border border-${agent.color}-100 p-6 transition-all hover:shadow-xl`}>
-              <div className="flex items-start gap-4">
-                <div className={`w-14 h-14 rounded-2xl bg-${agent.color}-100 flex items-center justify-center text-2xl flex-shrink-0`}>
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-start gap-3.5">
+                <div className={`w-10 h-10 rounded-xl bg-${agent.color}-100 flex items-center justify-center text-lg flex-shrink-0`}>
                   {agent.icon}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-lg font-bold text-gray-900">Agent {agent.id}: {agent.name}</h3>
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium bg-${agent.color}-100 text-${agent.color}-700`}>
+                    <h3 className="text-sm font-semibold text-gray-900">Agent {agent.id}: {agent.name}</h3>
+                    <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded bg-${agent.color}-100 text-${agent.color}-700 whitespace-nowrap`}>
                       {agent.role}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-4">{agent.description}</p>
+                  <p className="text-xs text-gray-500 mb-3">{agent.desc}</p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Capabilities</h4>
-                      <ul className="space-y-1.5">
-                        {agent.capabilities.map((cap, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                            <span className={`mt-1 w-1.5 h-1.5 rounded-full bg-${agent.color}-500 flex-shrink-0`}></span>
-                            {cap}
+                      <p className="text-[10px] text-gray-400 uppercase mb-1.5">Capabilities</p>
+                      <ul className="space-y-1">
+                        {agent.caps.map((c, i) => (
+                          <li key={i} className="flex items-center gap-1.5 text-[11px] text-gray-600">
+                            <span className={`w-1 h-1 rounded-full bg-${agent.color}-400`}></span>
+                            {c}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Process</h4>
-                        <div className={`bg-${agent.color}-50 rounded-lg px-3 py-2 text-sm font-medium text-${agent.color}-700`}>
-                          {agent.processes}
+                    <div>
+                      <div className="mb-2">
+                        <p className="text-[10px] text-gray-400 uppercase mb-1">Input → Output</p>
+                        <div className={`bg-${agent.color}-50 rounded-lg px-2.5 py-1.5 text-[11px] font-medium text-${agent.color}-700`}>
+                          {agent.input} → {agent.output}
                         </div>
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Output</h4>
-                        <p className="text-sm text-gray-600">{agent.output}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* Pricing */}
-              <div className={`mt-4 pt-4 border-t border-${agent.color}-100 flex items-center justify-between`}>
-                <span className="text-xs text-gray-400">
-                  {agent.id === 1 ? 'Input: Voice/Image/Text' :
-                   agent.id === 2 ? 'Input: Diagnosis from Agent 1' :
-                   'Input: Diagnosis + Treatment Plan'}
-                </span>
-                <span className={`text-xs font-medium px-2 py-1 rounded-full bg-${agent.color}-100 text-${agent.color}-700`}>
-                  {agent.id === 1 ? '0.50 USDC' :
-                   agent.id === 2 ? 'Included in Diagnosis' :
-                   '0.25 USDC'}
-                </span>
-              </div>
             </div>
 
-            {/* Connector arrow between agents */}
             {index < agents.length - 1 && (
-              <div className="flex justify-center py-3">
-                <div className="flex flex-col items-center">
-                  <div className="w-0.5 h-4 bg-gradient-to-b from-emerald-300 to-amber-300"></div>
-                  <div className="text-gray-300 text-sm">⬇ Output → Input</div>
-                  <div className="w-0.5 h-4 bg-gradient-to-b from-amber-300 to-blue-300"></div>
-                </div>
+              <div className="flex justify-center py-2">
+                <div className="text-gray-300 text-[10px]">↓ feeds into ↓</div>
               </div>
             )}
           </div>
         ))}
       </div>
 
-      {/* Orchestration summary */}
-      <div className="mt-8 bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-2xl p-6 text-white">
-        <h3 className="font-bold text-lg mb-2">🤖 Multi-Agent Orchestration</h3>
-        <p className="text-sm opacity-90">
-          The Shamba-Sync Orchestrator coordinates Agent 1 → Agent 2 → Agent 3 sequentially.
-          Each agent passes structured data to the next, creating a complete pipeline from raw farmer input
-          to actionable diagnosis, treatment plan, and market intelligence. This A2A (Agent-to-Agent)
-          composability is powered by the CROO Agent Protocol (CAP).
+      <div className="mt-5 bg-emerald-600 rounded-2xl p-5 text-white">
+        <h3 className="text-sm font-semibold mb-1.5 opacity-90">Multi-Agent Orchestration</h3>
+        <p className="text-xs opacity-80 leading-relaxed">
+          The Shamba-Sync Orchestrator coordinates Agent 1 → 2 → 3 sequentially.
+          Each passes structured data to the next, creating a complete pipeline from raw farmer input
+          to diagnosis, treatment, and market intelligence — powered by CROO Agent Protocol (CAP).
         </p>
-        <div className="mt-3 flex items-center gap-2 text-sm">
-          <span className="bg-white/20 px-3 py-1 rounded-full">⚡ 3 Agents</span>
-          <span className="bg-white/20 px-3 py-1 rounded-full">🔄 Sequential Pipeline</span>
-          <span className="bg-white/20 px-3 py-1 rounded-full">💰 0.75 USDC Total</span>
+        <div className="flex flex-wrap gap-2 mt-3">
+          <span className="bg-white/15 px-2 py-0.5 rounded text-[10px]">3 Agents</span>
+          <span className="bg-white/15 px-2 py-0.5 rounded text-[10px]">Sequential Pipeline</span>
+          <span className="bg-white/15 px-2 py-0.5 rounded text-[10px]">0.75 USDC Total</span>
         </div>
       </div>
     </div>

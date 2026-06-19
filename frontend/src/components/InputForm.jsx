@@ -14,7 +14,6 @@ export default function InputForm({ onSubmit, loading, error }) {
   const handleImageUpload = (e) => {
     const file = e.target.files[0]
     if (!file) return
-
     const reader = new FileReader()
     reader.onload = (event) => {
       const base64 = event.target.result.split(',')[1]
@@ -27,32 +26,27 @@ export default function InputForm({ onSubmit, loading, error }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit({
-      ...formData,
-      image: imageBase64,
-    })
+    onSubmit({ ...formData, image: imageBase64 })
   }
 
   const demoPresets = [
     {
-      label: '🌱 Tomato Early Blight (Swahili)',
+      label: '🍅 Tomato issue (Swahili)',
       data: {
         type: 'mixed',
         text: 'Mazao yangu ya nyanya yana majani manjano na yanaonekana kukauka. Nisaidie kutambua tatizo.',
         region: 'east-africa',
         language: 'sw',
       },
-      note: 'Farmer describing yellowing tomato leaves in Swahili',
     },
     {
-      label: '🌾 Maize Market Check',
+      label: '🌽 Maize market check',
       data: {
         type: 'text',
         text: 'What is the current market price for maize in East Africa? Is it a good time to sell?',
         region: 'east-africa',
         language: 'en',
       },
-      note: 'English market price inquiry for maize',
     },
   ]
 
@@ -63,127 +57,119 @@ export default function InputForm({ onSubmit, loading, error }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      {/* Quick Demo Buttons */}
-      <div className="mb-6">
-        <p className="text-sm font-medium text-gray-500 mb-2">⚡ Quick Demo</p>
+    <div className="max-w-2xl mx-auto">
+      {/* Quick Demo */}
+      <div className="mb-5">
+        <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2.5">Quick demo</p>
         <div className="flex flex-wrap gap-2">
           {demoPresets.map((preset, i) => (
             <button
               key={i}
               onClick={() => loadDemo(preset)}
-              className="text-left bg-white border border-emerald-200 rounded-xl p-3 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all shadow-sm hover:shadow-md"
+              className="text-left bg-white border border-gray-200 rounded-lg px-3.5 py-2 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all text-sm text-gray-600 hover:text-gray-800 shadow-sm"
             >
-              <div className="text-sm font-medium text-gray-800">{preset.label}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{preset.note}</div>
+              {preset.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Main Form */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-emerald-100 p-6 sm:p-8 space-y-6">
-        {/* Input Type Selector */}
+      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 space-y-5">
+        {/* Input Type */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">Input Method</label>
-          <div className="grid grid-cols-3 gap-3">
+          <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Input method</label>
+          <div className="grid grid-cols-3 gap-2">
             {[
-              { value: 'text', label: '📝 Text', desc: 'Type your question' },
-              { value: 'mixed', label: '📸 Image', desc: 'Upload crop photo' },
-              { value: 'voice', label: '🎤 Voice', desc: 'Record voice note' },
+              { value: 'text', label: '📝 Text', desc: 'Type a question' },
+              { value: 'mixed', label: '📸 Image', desc: 'Upload a photo' },
+              { value: 'voice', label: '🎤 Voice', desc: 'Voice note' },
             ].map((opt) => (
               <button
                 type="button"
                 key={opt.value}
                 onClick={() => setFormData(prev => ({ ...prev, type: opt.value }))}
-                className={`p-4 rounded-xl border-2 text-center transition-all ${
+                className={`px-3 py-3 rounded-xl border text-center transition-all ${
                   formData.type === opt.value
-                    ? 'border-emerald-500 bg-emerald-50 shadow-sm'
-                    : 'border-gray-200 hover:border-emerald-200 hover:bg-emerald-50/30'
+                    ? 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500/20'
+                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 }`}
               >
-                <div className="text-xl mb-1">{opt.label}</div>
-                <div className="text-xs text-gray-500">{opt.desc}</div>
+                <div className="text-lg mb-0.5">{opt.label}</div>
+                <div className="text-[11px] text-gray-400">{opt.desc}</div>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Image Upload - shown when image type selected */}
+        {/* Image Upload */}
         {(formData.type === 'mixed' || formData.type === 'image') && (
           <div className="animate-slide-up">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Upload Crop Photo</label>
+            <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2.5">Crop photo</label>
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-emerald-300 rounded-2xl p-8 text-center cursor-pointer hover:border-emerald-500 hover:bg-emerald-50/50 transition-all"
+              className="border-2 border-dashed border-gray-200 rounded-xl py-6 text-center cursor-pointer hover:border-emerald-400 hover:bg-emerald-50/30 transition-all"
             >
               {imagePreview ? (
-                <div className="space-y-3">
-                  <img src={imagePreview} alt="Crop preview" className="max-h-48 mx-auto rounded-xl shadow-sm" />
-                  <p className="text-sm text-emerald-600">Click to change photo</p>
+                <div className="space-y-2">
+                  <img src={imagePreview} alt="Crop" className="h-32 mx-auto rounded-lg shadow-sm object-cover" />
+                  <p className="text-xs text-emerald-600 font-medium">Click to change</p>
                 </div>
               ) : (
-                <div className="space-y-2">
-                  <div className="text-4xl">📸</div>
-                  <p className="text-sm text-gray-600">Click to upload a photo of your crop</p>
-                  <p className="text-xs text-gray-400">JPG, PNG, or WebP</p>
+                <div>
+                  <div className="text-2xl mb-1">📸</div>
+                  <p className="text-sm text-gray-500">Click to upload a photo</p>
+                  <p className="text-xs text-gray-400 mt-0.5">JPG, PNG, or WebP</p>
                 </div>
               )}
             </div>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
           </div>
         )}
 
         {/* Text Input */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {formData.type === 'voice' ? '🎤 Voice Note Transcript (simulated)' : '✏️ Describe Your Crop Issue'}
+          <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2.5">
+            {formData.type === 'voice' ? 'Voice note transcript (simulated)' : 'Describe your crop issue'}
           </label>
           <textarea
             value={formData.text}
             onChange={(e) => setFormData(prev => ({ ...prev, text: e.target.value }))}
-            rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none resize-none transition-all text-gray-700"
+            rows={3}
+            className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none resize-none transition-all text-sm text-gray-700 placeholder:text-gray-300"
             placeholder={
               formData.language === 'sw'
-                ? 'Eleza tatizo la mazao yako... (Describe your crop problem in Swahili)'
+                ? 'Eleza tatizo la mazao yako...'
                 : formData.language === 'ha'
-                ? 'Bayyana matsalar amfanin gonar ku a Hausa...'
-                : 'e.g., My tomato leaves are turning yellow and developing spots'
+                ? 'Bayyana matsalar amfanin gonar ku...'
+                : 'e.g., My tomato leaves are turning yellow...'
             }
           />
         </div>
 
-        {/* Region and Language */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Region + Language */}
+        <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">📍 Region</label>
+            <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Region</label>
             <select
               value={formData.region}
               onChange={(e) => setFormData(prev => ({ ...prev, region: e.target.value }))}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none bg-white text-gray-700"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none bg-white text-sm text-gray-700"
             >
-              <option value="east-africa">🌍 East Africa (TZ, KE, UG, RW, BI)</option>
-              <option value="west-africa">🌍 West Africa (NG, GH, SN, CI)</option>
+              <option value="east-africa">🌍 East Africa</option>
+              <option value="west-africa">🌍 West Africa</option>
               <option value="central-africa">🌍 Central Africa</option>
               <option value="southern-africa">🌍 Southern Africa</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">🗣️ Language</label>
+            <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Language</label>
             <select
               value={formData.language}
               onChange={(e) => setFormData(prev => ({ ...prev, language: e.target.value }))}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none bg-white text-gray-700"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none bg-white text-sm text-gray-700"
             >
               <option value="en">🇬🇧 English</option>
-              <option value="sw">🇹🇿 Swahili (Kiswahili)</option>
+              <option value="sw">🇹🇿 Swahili</option>
               <option value="ha">🇳🇬 Hausa</option>
               <option value="yo">🇳🇬 Yoruba</option>
               <option value="rw">🇷🇼 Kinyarwanda</option>
@@ -192,35 +178,34 @@ export default function InputForm({ onSubmit, loading, error }) {
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold rounded-xl hover:from-emerald-700 hover:to-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-emerald-200 hover:shadow-xl hover:-translate-y-0.5"
+          className="w-full py-3 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm shadow-sm"
         >
           {loading ? (
             <span className="flex items-center justify-center gap-2">
-              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
               Processing through 3 agents...
             </span>
           ) : (
-            <span>🚀 Diagnose My Crop — 0.75 USDC</span>
+            <span>Diagnose My Crop — 0.75 USDC</span>
           )}
         </button>
 
         {/* Error */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm animate-slide-up">
+          <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-600">
             ❌ {error}
           </div>
         )}
 
-        {/* Pricing note */}
-        <p className="text-xs text-gray-400 text-center">
-          Powered by CROO Agent Protocol • USDC payments on Solana • 0% gas fee during launch window
+        <p className="text-[11px] text-gray-300 text-center">
+          CROO Agent Protocol • USDC on Solana • 0% gas fee
         </p>
       </form>
     </div>
