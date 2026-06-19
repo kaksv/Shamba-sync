@@ -1,9 +1,9 @@
 export default function CAPSection() {
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="text-center mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">CROO Agent Protocol (CAP)</h2>
-        <p className="text-sm text-gray-400 mt-1">Decentralized A2A commerce infrastructure</p>
+      <div className="text-center mb-5 animate-fade-up">
+        <h2 className="text-base font-semibold text-gray-900">CROO Agent Protocol (CAP)</h2>
+        <p className="text-xs text-gray-400 mt-0.5">Decentralized A2A commerce infrastructure</p>
       </div>
 
       {/* Agent Identity */}

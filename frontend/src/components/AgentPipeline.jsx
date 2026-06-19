@@ -37,9 +37,9 @@ export default function AgentPipeline() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="text-center mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">Agent Pipeline</h2>
-        <p className="text-sm text-gray-400 mt-1">Three specialized agents working in sequence</p>
+      <div className="text-center mb-5 animate-fade-up">
+        <h2 className="text-base font-semibold text-gray-900">Agent Pipeline</h2>
+        <p className="text-xs text-gray-400 mt-0.5">Three specialized agents working in sequence</p>
       </div>
 
       <div className="space-y-0">

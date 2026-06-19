@@ -59,14 +59,14 @@ export default function InputForm({ onSubmit, loading, error }) {
   return (
     <div className="max-w-2xl mx-auto">
       {/* Quick Demo */}
-      <div className="mb-5">
-        <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2.5">Quick demo</p>
-        <div className="flex flex-wrap gap-2">
+      <div className="mb-4 animate-fade-up">
+        <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-2">Quick demo</p>
+        <div className="flex flex-wrap gap-1.5">
           {demoPresets.map((preset, i) => (
             <button
               key={i}
               onClick={() => loadDemo(preset)}
-              className="text-left bg-white border border-gray-200 rounded-lg px-3.5 py-2 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all text-sm text-gray-600 hover:text-gray-800 shadow-sm"
+              className="text-left bg-white border border-gray-200 rounded-lg px-3 py-1.5 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all text-xs text-gray-500 hover:text-gray-800 shadow-sm"
             >
               {preset.label}
             </button>
@@ -74,11 +74,11 @@ export default function InputForm({ onSubmit, loading, error }) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-5 space-y-4 stagger-children">
         {/* Input Type */}
         <div>
-          <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Input method</label>
-          <div className="grid grid-cols-3 gap-2">
+          <label className="block text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-2.5">Input method</label>
+          <div className="grid grid-cols-3 gap-1.5">
             {[
               { value: 'text', label: '📝 Text', desc: 'Type a question' },
               { value: 'mixed', label: '📸 Image', desc: 'Upload a photo' },

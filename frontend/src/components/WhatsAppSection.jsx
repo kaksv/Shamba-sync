@@ -4,12 +4,12 @@ export default function WhatsAppSection() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="text-center mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">WhatsApp Integration</h2>
-        <p className="text-sm text-gray-400 mt-1">Access Shamba-Sync from WhatsApp — no app download needed</p>
+      <div className="text-center mb-5 animate-fade-up">
+        <h2 className="text-base font-semibold text-gray-900">WhatsApp Integration</h2>
+        <p className="text-xs text-gray-400 mt-0.5">Access Shamba-Sync from WhatsApp — no app download needed</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 stagger-children">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
           <div className="text-center mb-3">
             <span className="text-3xl">💬</span>

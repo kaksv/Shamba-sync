@@ -7,7 +7,7 @@ export default function ResultsDashboard({ result }) {
   const market = steps?.marketConnector
 
   return (
-    <div className="max-w-3xl mx-auto space-y-4 animate-slide-up">
+    <div className="max-w-3xl mx-auto space-y-3 stagger-children">
       {/* Header */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
         <div className="flex items-center justify-between mb-3">

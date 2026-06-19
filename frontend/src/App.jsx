@@ -50,44 +50,44 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/30 to-white">
+    <div className="min-h-screen">
       <Header />
       <Hero />
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
+      <main className="max-w-5xl mx-auto px-3 sm:px-4 pb-12">
         {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center gap-1.5 mb-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-1.5">
+        <div className="flex flex-wrap justify-center gap-1 mb-6 bg-white rounded-xl shadow-sm border border-gray-100 p-1 animate-fade-in">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+              className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.id
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200/50'
+                  ? 'bg-emerald-600 text-white shadow-sm'
                   : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
               }`}
             >
-              <span className="mr-1.5">{tab.icon}</span>
+              <span className="mr-1">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
         </div>
 
         {/* Tab Content */}
-        <div className="animate-fade-in min-h-[400px]">
+        <div key={activeTab} className="tab-enter">
           {activeTab === 'input' && (
             <InputForm onSubmit={handleProcessQuery} loading={loading} error={error} />
           )}
 
           {activeTab === 'results' && (
             result ? <ResultsDashboard result={result} /> : (
-              <div className="text-center py-20">
-                <div className="text-5xl mb-4 text-gray-300">📋</div>
-                <p className="text-lg text-gray-400">No results yet</p>
+              <div className="text-center py-16 animate-fade-up">
+                <div className="text-4xl mb-3 text-gray-300">📋</div>
+                <p className="text-base text-gray-400">No results yet</p>
                 <p className="text-sm text-gray-300 mt-1">Submit a crop query to see results here</p>
                 <button
                   onClick={() => setActiveTab('input')}
-                  className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors text-sm font-medium"
+                  className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium"
                 >
                   Go to Input →
                 </button>
