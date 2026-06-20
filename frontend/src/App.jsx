@@ -8,6 +8,9 @@ import CAPSection from './components/CAPSection'
 import WhatsAppSection from './components/WhatsAppSection'
 import Footer from './components/Footer'
 
+// Backend API URL — set VITE_API_URL in Vercel env vars for production
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 function App() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
@@ -20,7 +23,7 @@ function App() {
     setResult(null)
 
     try {
-      const response = await fetch('/api/process', {
+      const response = await fetch(`${API_URL}/api/process`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
