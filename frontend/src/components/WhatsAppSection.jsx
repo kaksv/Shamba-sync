@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 export default function WhatsAppSection() {
   const [simMessage, setSimMessage] = useState('')
   const [simChat, setSimChat] = useState([])
@@ -23,7 +25,7 @@ export default function WhatsAppSection() {
 
     try {
       // Call the actual backend API
-      const response = await fetch('/api/process', {
+      const response = await fetch(`${API_URL}/api/process`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -35,6 +37,10 @@ export default function WhatsAppSection() {
                     messageText.toLowerCase().includes('nisaidie') ? 'sw' : 'en',
         }),
       })
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`)
+      }
 
       const data = await response.json()
 
@@ -70,7 +76,7 @@ export default function WhatsAppSection() {
       }, 1000)
 
     } catch {
-      setSimChat(prev => [...prev, { role: 'bot', text: '❌ Error: Could not reach the agent server. Make sure the backend is running.' }])
+      setSimChat(prev => [...prev, { role: 'bot', text: '❌ Error: Backend not reachable. Make sure the server is running:\n\n  cd shamba-sync/backend && node src/index.js' }])
       setSimLoading(false)
     }
   }
